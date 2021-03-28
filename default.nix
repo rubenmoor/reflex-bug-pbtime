@@ -1,9 +1,5 @@
 { system ? builtins.currentSystem
 , obelisk ? import ./.obelisk/impl {
-    reflex-platform-func = args@{ ... }: import ../podcast/reflex-platform (args // {
-      inherit system;
-      hlsSupport = true;
-    });
     inherit system;
     iosSdkVersion = "13.2";
 
