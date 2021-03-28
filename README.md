@@ -7,12 +7,15 @@
 - install [Obelisk](https://github.com/obsidiansystems/obelisk)
 - checkout this repo
 
+``` shell
     $> g clone git@github.com:rubenmoor/reflex-bug-pbtime.git
-
     $> cd reflex-bug-pbtime
+```
 
 - run
 
+``` shell
     $> ob run
+```
 
 - visit http://localhost:8000
