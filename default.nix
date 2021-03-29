@@ -1,9 +1,5 @@
 { system ? builtins.currentSystem
 , obelisk ? import ./.obelisk/impl {
-    reflex-platform-func = args@{ ... }: import ../podcast/reflex-platform (args // {
-      inherit system;
-      hlsSupport = true;
-    });
     inherit system;
     iosSdkVersion = "13.2";
 
@@ -17,11 +13,27 @@
     # Uncomment and set this to `true` to indicate your acceptance:
     # terms.security.acme.acceptTerms = false;
   }
+, pkgs ? import <nixpkgs> {}
 }:
 with obelisk;
-project ./. ({ ... }: {
-  android.applicationId = "systems.obsidian.obelisk.examples.minimal";
-  android.displayName = "Obelisk Minimal Example";
-  ios.bundleIdentifier = "systems.obsidian.obelisk.examples.minimal";
-  ios.bundleName = "Obelisk Minimal Example";
-})
+let reflex-dom-framework = pkgs.fetchFromGitHub {
+      owner = "reflex-frp";
+      repo = "reflex-dom";
+      rev = "b31529a469bc88cd6735b10ada63cc312ee98e16";
+      sha256 = "0lwbz3ahh0nlr3qd3la603m7gbjvr8kb0fdsssly3axwcb4rwxwq";
+    };
+in
+  project ./. ({ ... }: {
+    android.applicationId = "systems.obsidian.obelisk.examples.minimal";
+    android.displayName = "Obelisk Minimal Example";
+    ios.bundleIdentifier = "systems.obsidian.obelisk.examples.minimal";
+    ios.bundleName = "Obelisk Minimal Example";
+    overrides = self: super: {
+      reflex-dom = self.callCabal2nix "reflex-dom" (reflex-dom-framework + /reflex-dom) {};
+      reflex-dom-core = pkgs.haskell.lib.dontCheck (
+        self.callCabal2nix "reflex-dom-core" (
+          reflex-dom-framework + /reflex-dom-core
+        ) {}
+      );
+    };
+  })
