@@ -1,6 +1,12 @@
 ## Result
 
+Original bug on branch `main`.
+
 ![screenshot of resulting page](reflex-bug.bmp)
+
+Fix with other issues on branch `ts-ssr-value`.
+
+![sreenshot of resulting page](reflex-bug-fix.bmp)
 
 ## How to run
 
