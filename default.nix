@@ -19,8 +19,8 @@ with obelisk;
 let reflex-dom-framework = pkgs.fetchFromGitHub {
       owner = "reflex-frp";
       repo = "reflex-dom";
-      rev = "b31529a469bc88cd6735b10ada63cc312ee98e16";
-      sha256 = "0lwbz3ahh0nlr3qd3la603m7gbjvr8kb0fdsssly3axwcb4rwxwq";
+      rev = "6a7782a61e90e7369a8278441eb47f702bb7c63b";
+      sha256 = "13y2h9cqhll55qgk7x33wnz88822irkdxych1c0fbw20jghhp96h";
     };
 in
   project ./. ({ ... }: {
